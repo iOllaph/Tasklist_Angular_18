@@ -1,0 +1,56 @@
+<div class="container-body">
+  <div class="container">
+    <div class="text-wrapper">
+      <div class="text-wrapper-time">
+        <span>10 April, Tue</span>
+      </div>
+      <div class="text-wrapper-task-count">
+        <span>10 Tasks </span>
+      </div>
+    </div>
+    <div class="task-list">
+      <div class="task-list-container">
+        <span class="material-symbols-outlined"> check_box_outline_blank </span>
+        <input
+          type="text"
+          class="task-list-container-text"
+          placeholder="Lorem ipsum dolor sit amet, consectetur."
+          maxlength="25"
+          readonly
+        />
+      </div>
+    </div>
+    <div class="add-todo-list">
+      <div
+        class="{{ diminish }} {{ expand }} checkclick"
+        (click)="appearInput()"
+      >
+        <span
+          class="material-symbols-outlined"
+          [ngStyle]="{ display: spanDisplay }"
+        >
+          add
+        </span>
+        <div
+          class="dot-addtask-form"
+          (submit)="addTask($event)"
+          [ngStyle]="{ display: formDisplay }"
+        >
+          <input
+            type="text"
+            class="dot-addtask-input"
+            [(ngModel)]="inputText"
+            placeholder="Add Task."
+            maxlength="25"
+          />
+          <button type="submit" class="dot-addtask-button">
+            <span class="material-symbols-outlined"> add </span>
+          </button>
+        </div>
+      </div>
+      <div class="dot-icon" id="dot-remove" style="display: none">
+        <span class="material-symbols-outlined"> delete </span>
+      </div>
+    </div>
+  </div>
+</div>
