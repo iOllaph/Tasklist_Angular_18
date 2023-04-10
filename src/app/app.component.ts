@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  inputText = "";
+
 
   expand = "";
 
@@ -26,7 +26,10 @@ export class AppComponent implements OnInit {
 
 
 
+
+
   appearInput() {
+
     if (!this.expand) {
 
       setTimeout(() => {
@@ -72,14 +75,18 @@ export class AppComponent implements OnInit {
     };
   };
 
+  savedTexts: string[] = [];
 
-  addTask(e: Event) {
-    e.preventDefault()
+  taskQuantity = this.savedTexts.length;
 
 
 
+
+  addText(value: string) {
+
+    if (value) {
+      this.savedTexts.push(value);
+
+    }
   }
-
-
-
 }

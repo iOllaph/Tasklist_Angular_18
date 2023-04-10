@@ -5,16 +5,17 @@
         <span>10 April, Tue</span>
       </div>
       <div class="text-wrapper-task-count">
-        <span>10 Tasks </span>
+        <span> {{ taskQuantity }} Tasks </span>
       </div>
     </div>
     <div class="task-list">
-      <div class="task-list-container">
+      <div class="task-list-container"  *ngFor="let textin of savedTexts">
         <span class="material-symbols-outlined"> check_box_outline_blank </span>
         <input
+          #inputText
           type="text"
           class="task-list-container-text"
-          placeholder="Lorem ipsum dolor sit amet, consectetur."
+          [value]="textin"
           maxlength="25"
           readonly
         />
@@ -33,17 +34,18 @@
         </span>
         <div
           class="dot-addtask-form"
-          (submit)="addTask($event)"
           [ngStyle]="{ display: formDisplay }"
         >
           <input
+            #inputText
             type="text"
             class="dot-addtask-input"
-            [(ngModel)]="inputText"
+            (keyup.enter) = "addText(inputText.value)"
             placeholder="Add Task."
             maxlength="25"
+
           />
-          <button type="submit" class="dot-addtask-button">
+          <button type="button"  (click)="addText(inputText.value)" class="dot-addtask-button">
             <span class="material-symbols-outlined"> add </span>
           </button>
         </div>
