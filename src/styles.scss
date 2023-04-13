@@ -1,20 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap');
-
-
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap');
 
 :root {
+
     --background-container: #413f6e;
-    --background-text-wrapper:#a6a4d1;
+    --background-text-wrapper: #a6a4d1;
     --text-wrapper-color: #fbfcff;
     --hover-color: #BE95C4;
 
 }
 
+html,
+body {
 
-html,body {
     margin: 0;
     padding: 0;
 }
