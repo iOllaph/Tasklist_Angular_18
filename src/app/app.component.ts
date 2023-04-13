@@ -7,11 +7,21 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
+  taskArray: any[] = [];
 
+  checkboxesArray: any[] = [];
 
-  expand = "";
+  taskAlert = "block";
 
-  diminish = "dot-icon";
+  taskQuantity = this.taskArray.length;
+
+  spanStatus = "";
+
+  spanButton = "add"
+
+  inputSize = "";
+
+  originalSize = "dot-icon";
 
   spanDisplay = "block";
 
@@ -19,52 +29,63 @@ export class AppComponent implements OnInit {
 
   constructor() { }
 
-
-
   ngOnInit(): void { }
 
+  showEmptyArrayText() {
 
+    if (this.taskArray.length >= 1) {
 
+      this.taskAlert = "none";
 
+    } else {
 
-
-  appearInput() {
-
-    if (!this.expand) {
-
-      setTimeout(() => {
-
-        this.expand = "expand";
-
-        this.diminish = "";
-
-        this.formDisplay = "flex";
-
-      }, 1);
-
-      window.addEventListener("click", this.onWindowClick);
-
-      this.spanDisplay = "none";
-
+      this.taskAlert = "block";
 
     }
 
-
   }
 
+  appearInput() {
 
+    if (this.spanButton == "add") {
 
+      if (!this.inputSize) {
+
+        setTimeout(() => {
+
+          this.inputSize = "inputSize";
+
+          this.originalSize = "";
+
+          this.formDisplay = "flex";
+
+        }, 1);
+
+        window.addEventListener("click", this.onWindowClick);
+
+        this.spanDisplay = "none";
+      }
+    } else {
+
+      this.taskArray = this.taskArray.filter(task => !task.checkBox);
+
+      this.showEmptyArrayText();
+
+      this.spanButton = "add";
+
+    }
+
+  }
 
   // Define click event handler for window clicks
   onWindowClick = (event: Event) => {
 
     // Check if the clicked element is not a child of .arroz
-
     if (!(event.target as HTMLElement).closest(".checkclick")) {
 
-      this.expand = "";
+      this.inputSize = "";
 
-      this.diminish = "dot-icon";
+      this.originalSize = "dot-icon";
 
       this.spanDisplay = "block";
 
@@ -72,21 +93,96 @@ export class AppComponent implements OnInit {
 
       // Remove click event listener on window
       window.removeEventListener("click", this.onWindowClick);
+
     };
+
   };
 
-  savedTexts: string[] = [];
+  addTask(element: any) {
 
-  taskQuantity = this.savedTexts.length;
+    if (element.value) {
 
+      this.taskArray.push({
 
+        id: 1 + this.taskArray.length,
 
+        text: element.value,
 
-  addText(value: string) {
+        readOnly: false,
 
-    if (value) {
-      this.savedTexts.push(value);
+        checkBox: false,
+
+      })
+
+      this.showEmptyArrayText();
+
+      element.value = null
 
     }
+
   }
+
+  editTask(item: any) {
+
+    if (item.readOnly === false) {
+
+      return "edit";
+
+    } else {
+
+      return "done";
+
+    }
+
+  }
+
+  checkboxCheck(item: any) {
+
+    if (item.checkBox === false) {
+
+      return "check_box_outline_blank";
+
+    } else {
+
+      return "check_box";
+
+    }
+
+  }
+
+  readonlyStatus(item: any) {
+
+    // Alternate code "  item.readOnly = ! item.readOnly "
+
+    if (item.readOnly === false) {
+
+      item.readOnly = true;
+
+    } else {
+
+      item.readOnly = false;
+
+    }
+
+  }
+
+  checkboxRemove(item: any) {
+
+    item.checkBox = !item.checkBox;
+
+    this.checkboxesArray = this.taskArray.filter(item => item.checkBox === true);
+
+    if (this.checkboxesArray.length >= 1) {
+
+      this.spanButton = "delete";
+
+    } else {
+
+      this.spanButton = "add";
+
+    }
+
+  }
+
 }
+
