@@ -1,3 +1,12 @@
+# Tasklist  
+
+In this project you can add,edit and remove the tasks.
+
+In the application appaer a counter over the tasks that are included.
+
+
+
+
 # FirstAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
