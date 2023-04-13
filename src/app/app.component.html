@@ -1,58 +1,119 @@
 <div class="container-body">
+
   <div class="container">
+
     <div class="text-wrapper">
+
       <div class="text-wrapper-time">
+
         <span>10 April, Tue</span>
+
       </div>
+
       <div class="text-wrapper-task-count">
-        <span> {{ taskQuantity }} Tasks </span>
+
+        <span> You have {{ taskArray.length}} Tasks  </span>
+
       </div>
+
     </div>
+
     <div class="task-list">
-      <div class="task-list-container"  *ngFor="let textin of savedTexts">
-        <span class="material-symbols-outlined"> check_box_outline_blank </span>
+      
+      <div class="task-alert" [ngStyle]="{ display: taskAlert }"  >
+
+        Tasks Appear Here.<br>
+        Add Some.
+
+      </div>
+
+      <div 
+
+        class="task-list-container"  
+        *ngFor="let item of taskArray; let i = index"  
+        [class.task-list-highlight] = "item.readOnly"
+        [class.remove-task] = "item.checkBox">
+
+        <span 
+
+          class="material-symbols-outlined"   
+          (click)="checkboxRemove(item)" 
+          [innerHTML]="checkboxCheck(item)">
+
+        </span>
+
+        <span 
+
+          class="material-symbols-outlined"  
+          (click) = "readonlyStatus(item)" 
+          [innerHTML]="editTask(item)"
+          >
+
+        </span>
+
         <input
-          #inputText
+
           type="text"
           class="task-list-container-text"
-          [value]="textin"
+          [class.task-list-text-highlight] = "item.readOnly"
+          [value]="item.text"
           maxlength="25"
-          readonly
+          [readOnly]="!item.readOnly"
+
         />
       </div>
+
     </div>
+
     <div class="add-todo-list">
+
       <div
-        class="{{ diminish }} {{ expand }} checkclick"
+
+        class="{{ originalSize }} {{ inputSize }} checkclick"
         (click)="appearInput()"
       >
         <span
+
           class="material-symbols-outlined"
           [ngStyle]="{ display: spanDisplay }"
         >
-          add
+        {{ spanButton }}
+
         </span>
+
         <div
+
           class="dot-addtask-form"
           [ngStyle]="{ display: formDisplay }"
+
         >
+
           <input
+
             #inputText
             type="text"
             class="dot-addtask-input"
-            (keyup.enter) = "addText(inputText.value)"
+            (keyup.enter) = "addTask(inputText)"
             placeholder="Add Task."
             maxlength="25"
 
           />
-          <button type="button"  (click)="addText(inputText.value)" class="dot-addtask-button">
+
+          <button 
+          type="button"  
+          (click)="addTask(inputText)"
+          class="dot-addtask-button"  >
+
             <span class="material-symbols-outlined"> add </span>
+
           </button>
+
         </div>
+
       </div>
-      <div class="dot-icon" id="dot-remove" style="display: none">
-        <span class="material-symbols-outlined"> delete </span>
-      </div>
+
     </div>
+
   </div>
+
 </div>
